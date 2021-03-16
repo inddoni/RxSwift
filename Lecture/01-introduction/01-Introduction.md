@@ -16,8 +16,8 @@
     - Variable의 변화를 감지하기 위해 KVO를 사용하거나
 
 ⇒ 이런 것들 때문에 너무 불필요하게 복잡해짐 🤯 <br>
-**⇒ 모든 Call & Response를 handling하는 하나의 일관된 시스템 "RX"**
-=> Rxswif는 Observable과 functional style operator를 제공하여 비동기 및 event-based 코드를 작성하도록 하는 라이브러리
+**⇒ 모든 Call & Response를 handling하는 하나의 일관된 시스템 "RX"** <br>
+=> Rxswif는 Observable과 functional style operator를 제공하여 비동기 및 event-based 코드를 작성하도록 하는 ㅇㄹ라이브러리
 
 ## 2. Concepts
 > **Every Observable instance is just a sequence.**
