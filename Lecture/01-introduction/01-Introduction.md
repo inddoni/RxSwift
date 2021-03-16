@@ -4,7 +4,7 @@
 2. Concepts
 3. Observable Sequence
 4. Observables and observers (aka subscribers)
-5. Appendix) Installing RxSwift (Using CocoaPods)
+- Appendix) Installing RxSwift (Using CocoaPods)
 
 ---
 ## 1. 왜 RxSwift를 쓸까?
@@ -12,11 +12,12 @@
 
     - @IBAction handler를 쓰거나
     - 키보드 변화 등에 대한 notification을 observation하거나
-    - URL session이 response를 내려줄 때 Clouser를 사용하거나
+    - URL session이 response를 내려줄 때 실행할 Clouser를 정의하거나
     - Variable의 변화를 감지하기 위해 KVO를 사용하거나
 
 ⇒ 이런 것들 때문에 너무 불필요하게 복잡해짐 🤯 <br>
-**⇒ 모든 Call & Response를 handling하는 One Consistent System "RX"**
+**⇒ 모든 Call & Response를 handling하는 하나의 일관된 시스템 "RX"**
+=> Rxswif는 Observable과 functional style operator를 제공하여 비동기 및 event-based 코드를 작성하도록 하는 라이브러리
 
 ## 2. Concepts
 > **Every Observable instance is just a sequence.**
