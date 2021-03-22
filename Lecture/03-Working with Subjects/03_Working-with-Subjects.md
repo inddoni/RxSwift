@@ -4,7 +4,7 @@
 2. PublishSubject
 3. ReplaySubject
 4. BehaviorSubject
-
+5. Subject의 Completed Event
 
 ---
 
@@ -13,6 +13,8 @@
 - observer와 Observable처럼 사용 가능 (두 가지 역할을 모두 수행)
   - observer ~> 하나 이상의 Observable을 subscribe할 수 있고
   - Observable ~> 새로운 item emit하고, 관찰한 item을 reemit하여 통과할 수 있음
+
+<br>
 
 ## 2. PublishSubject
 > subscription 시간을 기준으로 모든 observer에게 새로운 이벤트를 broadcast 할 수 있음
@@ -92,6 +94,7 @@ example("BehaviorSubject") {
   - error로 종료되면 subscribe 할 때, error를 emit해주고
   - completed로 동료되면 subscriber 할 때, completed를 emit해줌
 
+<br>
 
 ## Reference
 - ReactiveX 공식 홈페이지의 [Subject Docs](http://reactivex.io/documentation/subject.html)
