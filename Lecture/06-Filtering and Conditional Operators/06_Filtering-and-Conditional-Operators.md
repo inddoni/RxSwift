@@ -13,6 +13,8 @@
 10. skipWhile
 11. skipWhileWithIndex
 12. skipUntil
+<br>
+<br>
 
 ## 1. filter
 - 지정한 조건을 만족하는 element만 내보냄
@@ -205,7 +207,11 @@ example("skipWhile") {
 }
 ```
 ## 11. skipWhileWithIndex
-- 
+- 지정된 조건을 충족하는 요소를 내보내지 않고 나머지 요소를 방출합니다.
+- Observable 시퀀스의 시작 부분에서부터 적용
+- sequencial하게 skip하지 않아도 됨!
+- `emumerated()` : 옵저버블 시퀀스의 각 index와 원소의 값을 튜플로 갖는 옵저버블 return
+- 클로저에 각 element의 index로 전달
 ```swift
 example("skipWhileWithIndex") {
     let disposeBag = DisposeBag()
@@ -219,7 +225,9 @@ example("skipWhileWithIndex") {
 }
 ```
 ## 12. skipUntil
-- 
+- reference 옵저버블이 요소를 emit할 때까지 source 옵저버블 시퀀스에서 요소를 내보내지 않고 ignore함
+- source 옵저버블을 subscribe하지만, second 옵저버블(reference 옵저버블)이 요소를 내보낼 때까지 소스 옵저버블의 emit은 무시함 (버림)
+- second 옵저버블(reference 옵저버블)이 요소를 내보내면 그 때부터 source 옵저버블을 미러링
 ```swift
 example("skipUntil") {
     let disposeBag = DisposeBag()
