@@ -39,6 +39,9 @@ example("reduce") {
 }
 ```
 ## 3. concat
+- 두 옵저버블을 이어 붙이는 오퍼레이터
+- first 옵저버블이 completed 된 이후에 second 옵저버블을 이어 붙임
+  - first 옵저버블이 completed 되지 않은 상태에서 second 옵저버블에서 아이템이 방출되면 concat에서 유실될 수 있음
 ```swift
 example("concat") {
     let disposeBag = DisposeBag()
