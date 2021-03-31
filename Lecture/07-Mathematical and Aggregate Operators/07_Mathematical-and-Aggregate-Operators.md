@@ -44,9 +44,8 @@ example("reduce") {
 - 둘 이상의 옵저버블을 interleaving 하지 않고 emit 함
     - `interleaving` : 끼워 넣기 / 분산해서 처리하는 것 (비동기와 비슷한 느낌)
 - 앞 옵저버블 시퀀스에서 언제 completed 되는지의 시점에 따라 뒤 옵저버블의 어떤 element들이 살아남을지 결정됨
-- 두 옵저버블을 이어 붙이는 오퍼레이터
-- first 옵저버블이 completed 된 이후에 second 옵저버블을 이어 붙임
-  - first 옵저버블이 completed 되지 않은 상태에서 second 옵저버블에서 아이템이 방출되면 concat에서 유실될 수 있음
+    - first 옵저버블이 completed 된 이후에 second 옵저버블을 이어 붙임
+    - first 옵저버블이 completed 되지 않은 상태에서 second 옵저버블에서 아이템이 방출되면 concat에서 유실될 수 있음
 ```swift
 example("concat") {
     let disposeBag = DisposeBag()
