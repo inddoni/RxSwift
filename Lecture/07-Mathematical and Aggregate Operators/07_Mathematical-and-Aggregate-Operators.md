@@ -28,6 +28,7 @@ example("toArray") {
 - seed 초기 값으로 시작한 다음, 옵저버블 시퀀스가 보내는 모든 elements에 accumulator 클로저 적용
 - 집계 결과를 single element 옵저버블 시퀀스로 반환
 - complete 될 때까지 방출되는 element에 accumulator 적용하는 과정을 반복
+- 왜 이름이 reduce일까,,?
 ```swift
 example("reduce") {
     let disposeBag = DisposeBag()
@@ -39,6 +40,10 @@ example("reduce") {
 }
 ```
 ## 3. concat
+- 다음 시퀀스에서 element가 emit되기 전, 각 시퀀스가 성공적으로 종료될 때까지 대기하면서 inner Observable sequences를 순차적으로 결합
+- 둘 이상의 옵저버블을 interleaving 하지 않고 emit 함
+    - `interleaving` : 끼워 넣기 / 분산해서 처리하는 것 (비동기와 비슷한 느낌)
+- 앞 옵저버블 시퀀스에서 언제 completed 되는지의 시점에 따라 뒤 옵저버블의 어떤 element들이 살아남을지 결정됨
 ```swift
 example("concat") {
     let disposeBag = DisposeBag()
@@ -58,7 +63,7 @@ example("concat") {
     
     subjectsSubject.onNext(subject2)
     
-    subject2.onNext("I would be ignored")
+    subject2.onNext("I would be ignored") // 출력 안됨
     subject2.onNext("🐱")
     
     subject1.onCompleted()
