@@ -49,7 +49,8 @@ func sampleWithPublish() {
 
 ```
 ## 2. replay
-- 
+- 초기 시드값 받아 옵저버블 시퀀스에서 내보낸 모든 항목에 Accumulator 클로저를 적용
+- 집계결과는 single element 옵저버블 시퀀스로 반환
 ```swift
 func sampleWithReplayBuffer() {
     printExampleHeader(#function)
