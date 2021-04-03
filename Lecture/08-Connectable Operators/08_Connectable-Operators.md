@@ -1,5 +1,8 @@
 # 08. Connectable Operators
-> 
+- subscirbe할 때, 요소의 emit을 시작하지 않고, `connect()` 메서드가 호출될 때만 emit하는 옵저버블 시퀀스 
+    - emit을 언제하느냐만 빼고는 일반 옵저버블 시퀀스와 동일함
+- 이 방법으로, 모든 subscriber가 연결 가능한 옵저버블 시퀀스를 subscribe할 때까지 기다린 후에 요소를 emit할 수 있음
+
 ```swift
 func sampleWithoutConnectableOperators() {
     printExampleHeader(#function)
