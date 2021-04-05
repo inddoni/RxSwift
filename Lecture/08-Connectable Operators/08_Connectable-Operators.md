@@ -1,8 +1,16 @@
 # 08. Connectable Operators
+- 연결 가능한 연산자~
 - subscirbe할 때, 요소의 emit을 시작하지 않고, `connect()` 메서드가 호출될 때만 emit하는 옵저버블 시퀀스 
     - emit을 언제하느냐만 빼고는 일반 옵저버블 시퀀스와 동일함
 - 이 방법으로, 모든 subscriber가 연결 가능한 옵저버블 시퀀스를 subscribe할 때까지 기다린 후에 요소를 emit할 수 있음
 
+> 1. publish
+> 2. replay
+> 3. multicast
+
+<br>
+
+### 들어가기 전에) 연결 불가능한 연산자 예시
 ```swift
 func sampleWithoutConnectableOperators() {
     printExampleHeader(#function)
@@ -17,11 +25,13 @@ func sampleWithoutConnectableOperators() {
             .subscribe(onNext: { print("Subscription: 2, Event: \($0)") })
     }
 }
+
+sampleWithoutConnectableOperators()
 ```
-1. publish
-2. replay
-3. multicast
-<br>
+- Subscirption 1이 찍히다가 5초 뒤 Subscription 2가 찍히기 시작
+- Subscription 1과 2가 섞여서 찍힘
+
+
 <br>
 
 ## 1. publish
