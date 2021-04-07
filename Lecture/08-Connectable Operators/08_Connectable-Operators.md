@@ -12,7 +12,8 @@
 <br>
 
 ### 들어가기 전에) non-connectable 연산자 예시
-- `interval` : 지정된 스케줄러에서 각 period가 지난 후에 요소를 내보내는 옵저버블 시퀀스를 만드는 오퍼레이터
+- `interval` : 지정된 스케줄러에서 특정 period가 지난 후에 요소를 내보내는 옵저버블 시퀀스를 만드는 오퍼레이터
+    - 특정 시간 간격을 두고 1씩 증가하는 정수 시퀀스를 방출하는 Observable을 생성
 ```swift
 func sampleWithoutConnectableOperators() {
     printExampleHeader(#function)
@@ -52,7 +53,7 @@ Subscription: 2, Event: 2
 
 ## 1. publish
 - 소스 옵저버블 시퀀스를 connectable 옵저버블 시퀀스로 변환하는 오퍼레이터
-- coon
+
 ```swift
 func sampleWithPublish() {
     printExampleHeader(#function)
@@ -145,6 +146,8 @@ Subscription 3:, Event: 4
 ## 3. multicast
 - 소스 옵저버블 시퀀스를 connectable 시퀀스로 변환
 - 특정 subject를 통해 emit하는 것을 브로드 캐스트 함
+- subject를 파라미터로 받음. 원본 Observerble에서 방출되는 이벤트가 구독자에게 바로 전달되는 것이 아니라 파라미터로 전달된 Subject에게 전달된다.
+- 그리고 이 Subject가 등록된 다수의 구독자에게 이벤트를 전달한다. (broadcast)
 ```swift
 func sampleWithMulticast() {
     printExampleHeader(#function)
@@ -197,3 +200,20 @@ Subject: 5
 	Subscription 3:, Event: 5
 
 ```
+
+## 추가1. RefCount
+- connectable Observable을 일반 Observable처럼 동작하게 만드는 오퍼레이터
+- connectable observable에서 작동하고 ordinary Observable를 반환함
+- 즉, connect() 할 때 emit을 시작하는게 아니라, subscribe를 할 때 connect되어 emit 해주도록 하는 역할
+- 첫 번째 observer가 observable을 구독하면 RefCount는 underlying connectable Observable에 연결됨
+- 얼마나 많은 다른 observer가 subscribe하는지 추적하고, 마지막 observer가 끝나기 전까지 underlying connectable Observable를 disconnect하지 않음
+- 주로 connect를 안쓰고도(명시하지 않고도) connectable observable의 이점(multicast)을 사용할 수 있도록 해주는 역할로 사용됨
+    - 하지만 그런 역할로 쓰려면 subscribe하는 시점에 대해 잘 조절해서 정해야함
+![image](https://user-images.githubusercontent.com/46644241/113874653-fb5c2f80-97f0-11eb-99bb-5bd991742c85.png)
+
+## 추가2. Share
+- multicast() + refCount()
+- 2개의 파라미터를 받음
+    - `replay:` 기본값은 0임 0보다 큰 값이면 ReplaySubject를 생성하므로 replay()와 같고, 기본값이면 PublishSubject를 생성하므로 publish()와 같음
+    - `scope:` 생명주기. 기본값은 .whileConnected임 .whileConnected를 쓰면 refCount()처럼 구독이 시작되면 connect 되었다가 구독이 끝나면 종료되는 반면, .forever는 multicast()처럼 하나의 subject를 공유함
+    
