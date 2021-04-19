@@ -1,8 +1,8 @@
 # RxSwift Traits
-0. Traits: Why, How they work
-1. Single
-2. Completable
-3. Maybe
+0. [Traits: Why, How they work](https://github.com/inddoni/RxSwift/blob/main/RxSwift%2BExtension/RxSwift_traits.md#0-traits-why-how-they-work)
+1. [Single](https://github.com/inddoni/RxSwift/blob/main/RxSwift%2BExtension/RxSwift_traits.md#1-single)
+2. [Completable](https://github.com/inddoni/RxSwift/blob/main/RxSwift%2BExtension/RxSwift_traits.md#2-completable)
+3. [Maybe](https://github.com/inddoni/RxSwift/blob/main/RxSwift%2BExtension/RxSwift_traits.md#3-maybe)
 
 
 ## 0. Traits: Why, How they work
@@ -25,9 +25,24 @@ struct Driver<Element> {
 }
 ...
 ```
-- 옵저버블 시퀀스에 대한 일종의 **builder 패턴 구현**으로 생각할 수 있다.
-- Traits가 빌드될 때 `.asObservable()`을 호출하면 다시 원래의 옵저버블 시퀀스(vanilla observable sequence)로 변환된다.
+- 옵저버블 시퀀스에 대한 일종의 **builder 패턴 구현**이라고 생각할 수 있다.
+- Traits가 빌드될 때 `.asObservable()` 을 호출하면 다시 원래의 옵저버블 시퀀스(vanilla observable sequence)로 변환된다.
 ## 1. Single
+- 일련의 elements를 emitting하는 대신에 항상 **Single element**나 **Error**를 emit하도록 보장하는 옵저버블의 변형
+
+>     Emits exactly one element, or an error. 정확히 하나의 요소 혹은 에러를 방출한다.
+>     Doesn't share side effects. 사이드 이펙트를 공유하지 않는다.
+
+- Common Use case
+    - 하나의 응답이나 하나의 에러만 반환할 수 있는 HTTP Request를 수행할 때!
+    - 단일 요소만 care하는 모든 경우를 모델링하는데 사용할 수 있음
+    - 요소의 무한 스트림에는 사용할 수 없음
+
+<br>
+
+**Creating a Single**
+- Single의 생성은 옵저버블 생성과 유사하다.
+- 간단한 예:
 ```swift
 func getRepo(_ repo: String) -> Single<[String: Any]> {
     return Single<[String: Any]>.create { single in
@@ -53,6 +68,7 @@ func getRepo(_ repo: String) -> Single<[String: Any]> {
     }
 }
 ```
+- 그 후에 다음과 같이 사용할 수 있음:
 ```swift
 getRepo("ReactiveX/RxSwift")
     .subscribe { event in
@@ -65,6 +81,7 @@ getRepo("ReactiveX/RxSwift")
     }
     .disposed(by: disposeBag)
 ```
+- `subscribe(onSuccess:onError:)` 는 다음과 같이 사용할 수 있음:
 ```swift
 getRepo("ReactiveX/RxSwift")
     .subscribe(onSuccess: { json in
@@ -75,7 +92,29 @@ getRepo("ReactiveX/RxSwift")
                })
     .disposed(by: disposeBag)
 ```
+- subscription은 **SingleEvent Enumeration**을 제공한다.
+    - Single type의 요소를 포함하는 `.success` 또는 `.error`를 포함하고 있다.
+    - 첫 번째 이벤트 이후에는 더 이상의 이벤트 emit이 발생하지 않는다.
+- Row 옵저버블 시퀀스에서 `.asSingle()`을 사용하여 Single로 변환할 수 있다.
+
+<br>
+
 ## 2. Completable
+- **complete**이나 **error**만 emit할 수 있는 옵저버블의 변형이다.
+- 어떤 element도 emit하지 않는 것이 보장된다.
+>     Emits zero elements. 0개의 요소를 방출한다.
+>     Emits a completion event, or an error. 완료 이벤트나 에러만 방출한다.
+>     Doesn't share side effects. 사이드 이펙트를 공유하지 않는다.
+- useful use case
+    - 작업이 완료된 사실만 신경 쓰고, 해당 완료의 결과로 나온 elements는 신경 쓰지 않아도 되는 경우를 모델링할 때!
+    - 요소를 방출할 수 없는 `Observable <Void>`을 사용하는 것과 비교할 수 있다.
+
+<br>
+
+**Creating a Completable**
+- Completable의 생성은 옵저버블 생성과 유사하다.
+- 간단한 예:
+
 ```swift
 func cacheLocally() -> Completable {
     return Completable.create { completable in
@@ -93,6 +132,7 @@ func cacheLocally() -> Completable {
     }
 }
 ```
+- 그 후에 다음과 같이 사용할 수 있음:
 ```swift
 cacheLocally()
     .subscribe { completable in
@@ -105,6 +145,7 @@ cacheLocally()
     }
     .disposed(by: disposeBag)
 ```
+- `subscribe(onCompleted:onError:)` 는 다음과 같이 사용할 수 있음:
 ```swift
 cacheLocally()
     .subscribe(onCompleted: {
@@ -115,7 +156,24 @@ cacheLocally()
                })
     .disposed(by: disposeBag)
 ```
+- subscription은 **CompletableEvent Enumeration**을 제공한다.
+    - 오류 없이 작업이 완료되었음을 나타내는 `.completed` 또는 `.error`를 포함하고 있다.
+    - 첫 번째 이벤트 이후에는 더 이상의 이벤트 emit이 발생하지 않는다.
+
 ## 3. Maybe
+- Maybe는 Single과 Completable 사이에있는 옵저버블의 변형입니다. 
+- single element를 emit하거나, 요소를 방출하지 않고 complete하거나, error를 emit 할 수 있습니다.
+    - 이 세 가지 중에 하나는 Maybe를 **terminate** 시킴
+    - 즉, completed한 Maybe도 요소를 방출할 수 없고, 요소를 emitted한 Maybe도 요소를 내 보낸 Maybe도 Completion event를 내보낼 수 없다.
+>     Emits either a completed event, a single element or an error. 완료 이벤트, 단일 요소 또는 에러만 방출한다.
+>     Doesn't share side effects. 사이드 이펙트를 공유하지 않는다.
+- Maybe를 사용하여 요소를 방출할 수 있는 작업을 모델링 할 수 있지만,
+- **반드시 요소를 방출 할 필요는 없습니다.**
+<br>
+
+**Creating a Maybe**
+- Maybe의 생성은 옵저버블 생성과 유사하다.
+- 간단한 예:
 ```swift
 func generateString() -> Maybe<String> {
     return Maybe<String>.create { maybe in
@@ -133,6 +191,7 @@ func generateString() -> Maybe<String> {
     }
 }
 ```
+- 그 후에 다음과 같이 사용할 수 있음:
 ```swift
 generateString()
     .subscribe { maybe in
@@ -147,6 +206,7 @@ generateString()
     }
     .disposed(by: disposeBag)
 ```
+- `subscribe(onSuccess:onError:onCompleted:)` 는 다음과 같이 사용할 수 있음:
 ```swift
 generateString()
     .subscribe(onSuccess: { element in
@@ -160,6 +220,10 @@ generateString()
                })
     .disposed(by: disposeBag)
 ```
+- Row 옵저버블 시퀀스에서 `.asMaybe()`을 사용하여 Maybe로 변환할 수 있다.
 
+<br>
+<br>
 
-> Reference : [RxSwift Traits 문서](https://github.com/ReactiveX/RxSwift/blob/main/Documentation/Traits.md)
+> **Reference** : [RxSwift Traits 문서](https://github.com/ReactiveX/RxSwift/blob/main/Documentation/Traits.md) <br>
+> **최종수정일** : 2021.04.20
