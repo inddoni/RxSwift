@@ -1,8 +1,8 @@
 # RxCocoa Traits
-1. Driver
-2. Signal
-3. ControlProperty
-4. ControlEvent
+1. [Driver](https://github.com/inddoni/RxSwift/blob/main/RxSwift%2BExtension/RxCocoa_traits.md#1-driver)
+2. [Signal](https://github.com/inddoni/RxSwift/blob/main/RxSwift%2BExtension/RxCocoa_traits.md#2-signal)
+3. [ControlProperty](https://github.com/inddoni/RxSwift/blob/main/RxSwift%2BExtension/RxCocoa_traits.md#3-controlproperty)
+4. [ControlEvent](https://github.com/inddoni/RxSwift/blob/main/RxSwift%2BExtension/RxCocoa_traits.md#4-controlevent)
 
 ## 1. Driver
 **Practical usage example**
@@ -159,3 +159,9 @@ extension Reactive where Base: UICollectionView {
         return ControlEvent(events: source)
     }
 ```
+
+<br>
+<br>
+
+> **Reference** : [RxSwift Traits 문서](https://github.com/ReactiveX/RxSwift/blob/main/Documentation/Traits.md) <br>
+> **최종수정일** : 2021.04.20
