@@ -5,6 +5,25 @@
 4. [ControlEvent](https://github.com/inddoni/RxSwift/blob/main/RxSwift%2BExtension/RxCocoa_traits.md#4-controlevent)
 
 ## 1. Driver
+
+> Can't error out. <br> 오류가 없다. 오류를 방출하지 않는다.
+> Observe occurs on **main scheduler**. <br> observe가 메인 스케줄러에서 일어난다.
+> Shares side effects (`share(replay: 1, scope: .whileConnected)`). 사이드 이펙트를 공유함
+
+- 가장 정교한 특성
+- UI Layer에서 reactive code를 작성하는 직관적인 방법을 제공하거나
+- 애플리케이션에서 데이터 스트림을 모델링하려는 모든 경우에 사용
+  
+**Why is it named Driver**
+- 의도된 use case는 애플리케이션을 drive하는 시퀀스를 모델링하는 것
+- E.g.
+  - CoreData model에서 UI를 구동함
+  - 다른 UI elements(바인딩)의 값을 이용해서 UI를 구동함
+- 일반 운영체제 구동과 같이, 시퀀스 에러가 발생하면 어플리케이션은 사용자 입력에 응답하지 않는다.
+- UI elements와 어플리케이션 로직은 일반적으로 thread로부터 안전하지 않기 때문에 이러한 element들이 main thread에서 observed되는 것 또한 매우 중요함
+- Driver는 사이드 이펙트를 공유하는 옵저버블 시퀀스를 builds함
+  
+
 **Practical usage example**
 - This is a typical beginner example:
 ```swift
@@ -25,6 +44,13 @@ results
     }
     .disposed(by: disposeBag)
 ```
+- 이 코드의 의도된 동작은 다음과 같음:
+  - 사용자 입력을 제한한다.
+  - 서버에 접속하여, 사용자 결과 리스트를 fetch해온다. (쿼리당 한 번)
+  - 결과를 두 UI elements(결과 테이블 뷰, 결과의 수를 표시하는 레이블)에 바인딩한다.
+- 그렇다면 이 코드의 문제점은?:
+  - `fetchAutoCompleteItems` 옵저버블 시퀀스가 오류가 나면(connection failed or parsing error), 모든 바인딩 해제하고 UI가 더 이상 새 쿼리에 응답하지 않는다.
+  - `fetchAutoCompleteItems`가 일부 백그라운드 thread에서 결과를 리턴하면, 그 결과가 백그라운드 thread에 UI elements가 바인딩되어 의도치않은 충돌이 일어날 수 있다.
 - 더 적절한 버전의 코드는 다음과 같음:
 ```swift
 let results = query.rx.text
