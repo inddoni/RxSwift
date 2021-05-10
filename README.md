@@ -1,12 +1,11 @@
 # 📚 RxSwift Study
-RxSwift에 대해 차근차근 알아보는 스터디
+RxSwift에 대해 공식 튜토리얼 Playground를 기반으로 공부합니다.
 > Date : 2021-03-09 ~ 2021-04-20 (7주) <br>
 > Reference : [RxSwift 공식 튜토리얼](https://github.com/ReactiveX/RxSwift), [RxSwift Traits 문서](https://github.com/ReactiveX/RxSwift/blob/main/Documentation/Traits.md)
 
 <br>
-<br>
 
-## Table of Contents
+## 🖇️ Table of Contents
 
 No. | Content | Date | Link
 :---------:|----------|:---------:|:---------:
@@ -24,24 +23,23 @@ No. | Content | Date | Link
  12 | RxCocoa Traits | 4/20 | [바로가기](https://github.com/inddoni/RxSwift/blob/main/RxSwift%2BExtension/RxCocoa_traits.md)
 
 <br>
-<br>
 
 ## 🕑 Study Timeline
 ### Session 0. 오리엔테이션  
-> 3월 9일 화요일
+- **날짜** : 3월 9일 화요일
 
 1. 룰 셋팅
-- 매주 2장씩 공부해온 뒤 랜덤으로 발표(주요 개념 소개)
-- 1인당 1문제씩 출제해오고 시험
-- 매주 시험 1등 기프티콘
+    - 매주 2장씩 공부해온 뒤 랜덤으로 발표(주요 개념 소개)
+    - 1인당 1문제씩 출제해오고 시험
+    - 매주 시험 1등 기프티콘
 
 2. 다음 스터디까지
-- 1~3장까지 공부해오기
-- 혹시 모를 발표 준비 및 1문제 출제 (입사 인터뷰 형식)
+    - 1~3장까지 공부해오기
+    - 혹시 모를 발표 준비 및 1문제 출제 (입사 인터뷰 형식)
 
 
 ### Session 1. 공식 튜토리얼 1~3장 
-> 3월 16일 화요일 <br>
+- **날짜** : 3월 16일 화요일 <br>
 
 1. Introduction 스터디
 2. Creating and Subscribing to Observables 스터디
@@ -49,34 +47,34 @@ No. | Content | Date | Link
 4. 문제풀이
 
 ### Session 2. 공식 튜토리얼 4~5장
-> 3월 23일 화요일 <br>
+- **날짜** : 3월 23일 화요일
 
 1. Combining Operators 스터디
 2. Transforming Operators 스터디
 3. 문제풀이
 
 ### Session 3. 공식 튜토리얼 6~7장
-> 3월 30일 화요일  <br>
+- **날짜** : 3월 30일 화요일
 
 1. Filtering and Conditional Operators 스터디
 2. Mathematical and Aggregate Operators 스터디
 3. 문제풀이
 
 ### Session 4. 공식 튜토리얼 8장
-> 4월 6일 화요일 <br>
+- **날짜** : 4월 6일 화요일 
 
 1. Connectable Operators 스터디
 2. 문제풀이
 
 ### Session 5. 공식 튜토리얼 9~10장
-> 4월 13일 화요일 <br>
+- **날짜** : 4월 13일 화요일
 
 1. Error Handling Operators 스터디
 2. Debugging Operators 스터디
 3. 문제풀이
 
 ### Session 6. RxSwift Traits 
-> 4월 20일 화요일 <br>
-
+- **날짜** : 4월 20일 화요일 
 1. RxSwift Traits 스터디
 2. RxCocoa Traits 스터디
+
