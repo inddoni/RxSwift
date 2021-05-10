@@ -1,6 +1,7 @@
-# RxSwift Study
-> Date : 2020-03-09 ~ (약 5주) <br>
-> Reference : [RxSwift 공식 튜토리얼](https://github.com/ReactiveX/RxSwift)
+# 📚 RxSwift Study
+RxSwift에 대해 차근차근 알아보는 스터디
+> Date : 2021-03-09 ~ 2021-04-20 (7주) <br>
+> Reference : [RxSwift 공식 튜토리얼](https://github.com/ReactiveX/RxSwift), [RxSwift Traits 문서](https://github.com/ReactiveX/RxSwift/blob/main/Documentation/Traits.md)
 
 <br>
 <br>
@@ -25,7 +26,7 @@ No. | Content | Date | Link
 <br>
 <br>
 
-## Study Timeline
+## 🕑 Study Timeline
 ### Session 0. 오리엔테이션  
 > 3월 9일 화요일
 
