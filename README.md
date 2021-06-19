@@ -10,8 +10,8 @@ RxSwift에 대해 공식 튜토리얼 Playground를 기반으로 공부합니다
 No. | Content | Date | Link
 :---------:|----------|:---------:|:---------:
  1 | Introduction | 3/9 | [바로가기](https://github.com/inddoni/RxSwift/blob/main/Lecture/01-introduction/01-Introduction.md)
- 2 | Creating and Subscribing to Observables | 3/14 | [바로가기](https://github.com/inddoni/RxSwift/blob/main/Lecture/02-Creating%20and%20Subscribing%20to%20Observables/02-Creating%20and%20Subscribing%20to%20Observables.md)
- 3 | Working with Subjects | 3/15 | [바로가기](https://github.com/inddoni/RxSwift/blob/main/Lecture/03-Working%20with%20Subjects/03-Working%20with%20Subjects.md)
+ 2 | Creating and Subscribing to Observables | 3/14 | [바로가기](https://github.com/inddoni/RxSwift/blob/main/Lecture/02-Creating%20and%20Subscribing%20to%20Observables/02_Creating-and-Subscribing-to-Observables.md)
+ 3 | Working with Subjects | 3/15 | [바로가기](https://github.com/inddoni/RxSwift/blob/main/Lecture/03-Working%20with%20Subjects/03_Working-with-Subjects.md)
  4 | Combining Operators | 3/22 | [바로가기](https://github.com/inddoni/RxSwift/blob/main/Lecture/04-Combining%20Operators/04_Combining-Operator.md)
  5 | Transforming Operators | 3/23 | [바로가기](https://github.com/inddoni/RxSwift/blob/main/Lecture/05-Transforming%20Operators/05_Transforming-Operators.md)
  6 | Filtering and Conditional Operators | 3/29 | [바로가기](https://github.com/inddoni/RxSwift/blob/main/Lecture/06-Filtering%20and%20Conditional%20Operators/06_Filtering-and-Conditional-Operators.md)
